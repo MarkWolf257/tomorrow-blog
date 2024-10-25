@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Login</title>
+    <link rel="stylesheet" href="/css/global.css" />
+    <link rel="stylesheet" href="/css/login.css" />
+</head>
+<body>
+<main>
+    <h1>Log In</h1>
+    <p>Welcome! Please log in to your account.</p>
+
+    <form method="post">
+        <p class="flex-block">
+            <label for="email">Email</label>
+            <input id="email" name="email" type="email" placeholder="example@domain.com" required />
+        </p>
+        <p class="flex-block">
+            <label for="password">Password</label>
+            <input id="password" name="password" type="password" placeholder="c;shdgiejfsd" required />
+        </p>
+        <p class="flex-inline">
+            <input id="remember" name="remember" type="checkbox" />
+            <label for="remember">Remember Me?</label>
+        </p>
+        <p class="flex-inline">
+            <a href="/forgot-password">Forgot Password?</a>
+        </p>
+        <p class="flex-block">
+            <button>Log In</button>
+        </p>
+        <p class="flex-inline">
+            Don't have an account? <a href="/signup">Sign Up</a>
+        </p>
+    </form>
+</main>
+</body>
+</html>

@@ -1,0 +1,28 @@
+extends layouts/main.pug
+
+block stylesheets
+    link(rel='stylesheet' href='/css/form-card.css')
+    link(rel='stylesheet' href='/css/button.css')
+
+block content
+    main(hx-ext='response-targets')
+        h1 Log In
+        p Welcome! Please log in to your account.
+
+        form(hx-post='/login' hx-target-error='#toast-container', hx-swap='afterbegin')
+            p.flex-block
+                label(for='email') Email
+                input#email(name='email' type='email' placeholder='example@domain.com' required)
+            p.flex-block
+                label(for='password') Password
+                input#password(name='password' type='password' placeholder='c;shdgiejfsd' required)
+            p.flex-inline
+                input#remember(name='remember' type='checkbox')
+                label(for='remember') Remember Me?
+            p.flex-inline
+                a(href='/forgot-password') Forgot Password?
+            p.flex-block
+                button Log In
+            p.flex-inline
+                | Don't have an account?
+                a(href='/signup') Sign Up

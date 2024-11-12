@@ -1,0 +1,7 @@
+extends layouts/main.pug
+
+block stylesheets
+    link(rel='stylesheet' href='/css/button.css')
+
+block content
+    button(hx-post='/logout') Logout

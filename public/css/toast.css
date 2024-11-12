@@ -1,0 +1,52 @@
+@keyframes fadeIn {
+    from {
+        transform: translateX(360px); /* Start slightly down */
+    }
+    to {
+        transform: translateX(0); /* End at original position */
+    }
+}
+
+#toast-container {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+#toast-container>div {
+    background-color: white;
+    box-shadow: 0 4px 16px lightgray;
+    border-radius: 4px;
+    padding: 16px;
+    width: 320px;
+
+    animation: fadeIn 0.5s forwards;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#toast-container>div>img {
+    padding: 4px;
+}
+
+#toast-container>div>img:first-child {
+    border-left: red solid 4px;
+    padding-left: 8px;
+}
+
+#toast-container>div>img:last-child:hover {
+    background-color: lightgray;
+    border-radius: 50%;
+}
+
+#toast-container>div>p {
+    width: 100%;
+    padding: 0 8px;
+    margin: 0;
+}

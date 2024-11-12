@@ -16,6 +16,7 @@ main {
     padding: 40px 120px;
 
     box-shadow: lightgray 0 16px 64px;
+    border-radius: 8px;
 }
 
 form {
@@ -75,16 +76,6 @@ input:focus:not([type=checkbox]) {
 input[type=checkbox] {
     width: 1.2rem;
     height: 1.2rem;
-}
-
-button {
-    padding: 0.8rem;
-    background-color: blue;
-    border: none;
-    border-radius: 8px;
-    font-family: 'Fira Sans', sans-serif;
-    font-size: 1.2rem;
-    color: white;
 }
 
 a {

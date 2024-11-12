@@ -7,20 +7,24 @@
   "scripts": {
     "build": "npx tsc",
     "start": "node build/app.js",
-    "dev": "ts-node-dev src/app.ts"
+    "dev": "ts-node-dev src/app.ts",
+    "docker-dev": "npm install && ts-node-dev --poll src/*.ts"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
     "dotenv": "^16.4.5",
-    "ejs": "^3.1.10",
     "express": "^4.19.2",
     "htmx.org": "^2.0.2",
-    "pg": "^8.13.0"
+    "jsonwebtoken": "^9.0.2",
+    "pg": "^8.13.0",
+    "pug": "^3.0.3",
+    "quill": "^2.0.2"
   },
   "devDependencies": {
     "@types/express": "^4.17.21",
+    "@types/jsonwebtoken": "^9.0.7",
     "@types/pg": "^8.11.10",
     "ts-node-dev": "^2.0.0",
     "typescript": "^5.5.4"

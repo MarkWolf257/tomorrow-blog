@@ -1,7 +1,8 @@
 extends layouts/main.pug
 
-block stylesheets
-    link(rel='stylesheet' href='/css/button.css')
+block metadata
+    title Tom's Blog
+    link(rel='stylesheet' href='/css/inputs.css')
 
 block content
     button(hx-post='/logout') Logout

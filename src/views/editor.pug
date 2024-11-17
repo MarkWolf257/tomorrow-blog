@@ -1,16 +1,41 @@
 extends layouts/main
 
-block stylesheets
+block metadata
+    title Edit Article
     link(rel='stylesheet' href='/modules/quill/quill.snow.css')
+    link(rel='stylesheet' href='/css/form.css')
+    link(rel='stylesheet' href='/css/inputs.css')
     link(rel='stylesheet' href='/css/editor.css')
 
 block content
     main
-        div(id='editor')
-            p Hello World
+        header
+            h1 Untitled Article
+        form(hx-boost='true' action='/article/create' method='post' enctype='multipart/form-data')
+            div
+                div#editor
+                    p Hello World
+            div
+                div.top-label-container
+                    label(for='title') Title
+                    input#title(name='title' type='text' placeholder='Untitled' required)
+                div.top-label-container
+                    label Thumbnail
+                    img#preview(src='/images/placeholder.svg' alt='Preview Thumbnail' width='320px' height='180px')
+                    input#thumbnail(name='thumbnail' type='file' accept='image/jpeg,image/png')
+                div.top-label-container
+                    button Save Changes
+
+
 
     script(src='/modules/quill/quill.js')
     script.
         const quill = new Quill('#editor', {
           theme: 'snow'
         });
+        document.getElementById('thumbnail').addEventListener('change', (event) => {
+          document.getElementById('preview').src = URL.createObjectURL(event.target.files[0]);
+        });
+        document.getElementsByTagName('form')[0].addEventListener('formdata', (event) => {
+          event.formData.append('content', JSON.stringify(quill.getSemanticHTML()));
+        })

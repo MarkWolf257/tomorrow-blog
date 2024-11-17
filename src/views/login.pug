@@ -1,28 +1,30 @@
 extends layouts/main.pug
 
-block stylesheets
-    link(rel='stylesheet' href='/css/form-card.css')
-    link(rel='stylesheet' href='/css/button.css')
+block metadata
+    title Login
+    link(rel='stylesheet' href='/css/modal.css')
+    link(rel='stylesheet' href='/css/form.css')
+    link(rel='stylesheet' href='/css/inputs.css')
 
 block content
-    main(hx-ext='response-targets')
+    main.modal
         h1 Log In
         p Welcome! Please log in to your account.
 
-        form(hx-post='/login' hx-target-error='#toast-container', hx-swap='afterbegin')
-            p.flex-block
+        form(hx-boost='true' action='/login' method='post')
+            div.top-label-container
                 label(for='email') Email
                 input#email(name='email' type='email' placeholder='example@domain.com' required)
-            p.flex-block
+            div.top-label-container
                 label(for='password') Password
                 input#password(name='password' type='password' placeholder='c;shdgiejfsd' required)
-            p.flex-inline
+            div.side-label-container
                 input#remember(name='remember' type='checkbox')
                 label(for='remember') Remember Me?
-            p.flex-inline
+            div.side-label-container
                 a(href='/forgot-password') Forgot Password?
-            p.flex-block
+            div.top-label-container
                 button Log In
-            p.flex-inline
+            div.side-label-container
                 | Don't have an account?
                 a(href='/signup') Sign Up

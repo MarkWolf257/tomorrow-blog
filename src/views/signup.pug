@@ -1,26 +1,28 @@
 extends layouts/main.pug
 
-block stylesheets
-    link(rel='stylesheet' href='/css/form-card.css')
-    link(rel='stylesheet' href='/css/button.css')
+block metadata
+    title Sign Up
+    link(rel='stylesheet' href='/css/modal.css')
+    link(rel='stylesheet' href='/css/form.css')
+    link(rel='stylesheet' href='/css/inputs.css')
 
 block content
-    main(hx-ext='response-targets')
+    main.modal
         h1 Sign Up
         p Welcome! Please create your new account.
 
-        form(hx-post='/signup' hx-target-error='#toast-container', hx-swap='afterbegin')
-            p.flex-block
+        form(hx-boost='true' action='/signup' method='post')
+            div.top-label-container
                 label(for='name') Name
                 input#name(name='name' type='text' placeholder='John Titor' required)
-            p.flex-block
+            div.top-label-container
                 label(for='email') Email
                 input#email(name='email' type='email' placeholder='example@domain.com' required)
-            p.flex-block
+            div.top-label-container
                 label(for='password') Password
                 input#password(name='password' type='password' placeholder='c;shdgiejfsd' required)
-            p.flex-block
+            div.top-label-container
                 button Sign Up
-            p.flex-inline
+            div.side-label-container
                 | Already have an account?
                 a(href='/login') Log In

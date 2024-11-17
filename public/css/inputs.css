@@ -1,0 +1,41 @@
+label {
+    font-weight: 500;
+}
+
+input {
+    padding: 1rem;
+    border-radius: 8px;
+    border: 2px solid lightgray;
+    transition: border 0.1s ease-in-out 0.1s;
+    font-size: 1rem;
+}
+
+input:focus:not([type=checkbox]) {
+    outline: 0;
+    border: 2px solid blue;
+}
+
+input[type=checkbox] {
+    width: 1.2rem;
+    height: 1.2rem;
+}
+
+button, input[type=file]::file-selector-button {
+    padding: 1rem;
+    background-color: blue;
+    border: none;
+    border-radius: 8px;
+    font-size: 1.2rem;
+    color: white;
+    cursor: pointer;
+}
+
+input[type=file] {
+    position: relative;
+}
+
+input[type=file]::file-selector-button {
+    position: absolute;
+    top: -0.15rem;
+    right: -0.3rem;
+}

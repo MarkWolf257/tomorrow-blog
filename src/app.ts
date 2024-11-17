@@ -1,13 +1,16 @@
 import { initDB } from "./database";
 import express, { Request, Response } from 'express';
 import {signup, login, logout} from './handlers/auth';
-import {checkIfAuthenticated} from "./middlewares";
+import { verifyAuthentication } from "./middlewares";
+import {createArticle} from "./handlers/article";
+import multer from 'multer';
 
 
 initDB().then(() => console.log('Database successfully initialized.'));
 
 const app = express();
 const port = process.env.PORT || 3000;
+const upload = multer({ dest: process.env.STORAGE });
 
 
 app.set('views', __dirname + '/views');
@@ -20,44 +23,38 @@ app.use('/', express.static('public'));
 app.use('/modules/htmx', express.static('node_modules/htmx.org/dist'));
 app.use('/modules/quill', express.static('node_modules/quill/dist'));
 
+app.use(verifyAuthentication);
 
-const routes = {
-    authenticatedPages: [
-        { path: '/', view: 'index' },
-        { path: '/editor', view: 'editor' },
-    ],
-    notAuthenticatedPages: [
-        { path: '/login', view: 'login' },
-        { path: '/signup', view: 'signup' },
-    ],
-    postApis: [
-        { path: '/login', handler: login },
-        { path: '/signup', handler: signup },
-        { path: '/logout', handler: logout },
-    ],
-}
 
-app.use(checkIfAuthenticated);
+app.get('/', (req: Request, res: Response) => {
+    if (res.locals.authenticated)
+        return res.render('index');
+    return res.redirect('/login');
+});
 
-for (let route of routes.authenticatedPages) {
-    app.get(route.path, (req: Request, res: Response) => {
-        if (res.locals.authenticated)
-            return res.render(route.view);
-        res.redirect('/login');
-    });
-}
+app.get('/editor', (req: Request, res: Response) => {
+    if (res.locals.authenticated)
+        return res.render('editor');
+    return res.redirect('/login');
+});
 
-for (let route of routes.notAuthenticatedPages) {
-    app.get(route.path, (req: Request, res: Response) => {
-        if (res.locals.authenticated)
-            return res.redirect('/');
-        res.render(route.view);
-    });
-}
+app.get('/login', (req: Request, res: Response) => {
+    if (res.locals.authenticated)
+        return res.redirect('/');
+    return res.render('login');
+});
 
-for (let route of routes.postApis) {
-    app.post(route.path, route.handler);
-}
+app.get('/signup', (req: Request, res: Response) => {
+    if (res.locals.authenticated)
+        return res.redirect('/');
+    return res.render('signup');
+});
+
+app.post('/login', login);
+app.post('/signup', signup);
+app.post('/logout', logout);
+app.post('/article/create', upload.single('thumbnail'), createArticle);
+
 
 
 app.listen(port, () => {

@@ -12,7 +12,7 @@ export const signup = async(req: Request<{}, {}, UserData>, res: Response) => {
     email = email.trim().toLowerCase();
 
     if (!email || !password) {
-        res.status(400).json({error: "Email and Password is required."});
+        res.status(400).send('Email and Password is required.');
     }
 
 
@@ -24,13 +24,13 @@ export const signup = async(req: Request<{}, {}, UserData>, res: Response) => {
     try {
         const result = await pool.query(query, [email, hash, salt, secret]);
         console.log(result);
-        res.status(201).json({success: true, message: "Account created successfully."});
+        return res.status(201).send('Account created successfully.');
     } catch (e: any) {
         console.log(e);
         if (e.code === '23505') {
-            res.status(409).render('partials/toast', { icon:'/icons/circle-exclamation-solid.svg', message:'Email already exists.' });
+            return res.status(409).send('Email already exists.');
         } else {
-            res.status(500).render('partials/toast', { icon:'/icons/circle-exclamation-solid.svg', message:'Server Error. Please try again later.' });
+            return res.status(500).send('Server Error. Please try again later.');
         }
     }
 }
@@ -43,7 +43,7 @@ export const login = async(req: Request<{}, {}, UserData>, res: Response) => {
     email = email.trim().toLowerCase();
 
     if (!email || !password) {
-        return res.status(400).json({error: "Email and Password is required."});
+        return res.status(400).send('Email and Password is required.');
     }
 
 
@@ -53,14 +53,11 @@ export const login = async(req: Request<{}, {}, UserData>, res: Response) => {
         result = await pool.query(query, [email]);
     } catch (e) {
         console.log(e);
-        return res.status(500).render('partials/toast', { icon:'/icons/circle-exclamation-solid.svg', message:'Server Error. Please try again later.' });
+        return res.status(500).send('Server Error. Please try again later.');
     }
 
     if (result.rows.length === 0) {
-        return res.status(404).render('partials/toast', {
-            icon:'/icons/circle-exclamation-solid.svg',
-            message:'Email not found.'
-        });
+        return res.status(404).send('Email not found.');
     }
 
 
@@ -69,22 +66,18 @@ export const login = async(req: Request<{}, {}, UserData>, res: Response) => {
     const secret = result.rows[0].jwt_secret;
 
     if (!hash.equals(result.rows[0].password_hash)) {
-        return res.status(403).render('partials/toast', {
-            icon: '/icons/circle-exclamation-solid.svg',
-            message: 'Incorrect password.'
-        });
+        return res.status(403).send('Incorrect password.');
     }
 
 
     const token = jwt.sign({ id, email }, secret);
 
-    res.set('HX-Redirect', '/');
     res.status(200).cookie('access_token', token, {
         httpOnly: true,
         maxAge: remember ? 7 * 24 * 60 * 60 * 1000 : undefined,
         secure: process.env.NODE_ENV !== 'development',
         sameSite: 'strict',
-    }).end();
+    }).redirect('/');
 }
 
 

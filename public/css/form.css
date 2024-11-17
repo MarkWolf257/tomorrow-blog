@@ -1,0 +1,31 @@
+form {
+    margin: 40px 0;
+
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 32px;
+
+    width: 100%;
+}
+
+h1 + p {
+    color: gray;
+}
+
+.top-label-container, .side-label-container {
+    display: flex;
+    gap: 0.8rem;
+    color: gray;
+}
+
+.top-label-container {
+    flex-direction: column;
+    width: 100%;
+}
+
+.side-label-container {
+    flex-direction: row;
+    width: max-content;
+    align-items: center;
+}

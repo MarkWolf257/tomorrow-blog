@@ -12,9 +12,5 @@ services:
       - '3000:3000'
     volumes:
       - './:/app'
-    environment:
-      DB_HOST: postgres
-      DB_PORT: 5432
-      NODE_ENV: development
     stdin_open: true
     tty: true

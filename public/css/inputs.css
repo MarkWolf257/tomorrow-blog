@@ -39,3 +39,17 @@ input[type=file]::file-selector-button {
     top: -0.15rem;
     right: -0.3rem;
 }
+
+label[for='thumbnail'] + img {
+    background-image: url('/images/placeholder.svg');
+    background-size: cover;
+}
+
+label[for='avatar'] + img {
+    align-self: center;
+}
+
+textarea {
+    min-height: 80px;
+    padding: 1rem;
+}

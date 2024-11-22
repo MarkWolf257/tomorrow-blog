@@ -1,0 +1,8 @@
+div.top-label-container
+    label(for='image')=label
+    img#preview(src='/images/placeholder.svg' alt='Preview Thumbnail' width='320px' height='180px')
+    input#image(name='image' type='file' accept='image/png')
+script.
+  document.getElementsByTagName('form')[0].addEventListener('formdata', (event) => {
+    event.formData.append('content', JSON.stringify(quill.getSemanticHTML()));
+  });

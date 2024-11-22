@@ -1,0 +1,19 @@
+body {
+    display: flex;
+    justify-content: center;
+}
+
+main {
+    padding: 80px;
+    max-width: 60rem;
+    background-color: white;
+}
+
+#profile {
+    margin-top: 80px;
+    border-top: #dedede 1px solid;
+    border-bottom: #dedede 1px solid;
+    padding: 40px 0;
+    display: flex;
+    gap: 16px;
+}

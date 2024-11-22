@@ -1,7 +1,13 @@
 export interface UserData {
+    name: string;
     email: string;
     password: string;
     remember: boolean;
+}
+
+export interface UserProfile {
+    name: string;
+    description: string;
 }
 
 export interface ArticleData {
@@ -11,6 +17,6 @@ export interface ArticleData {
 }
 
 export interface MyPayload {
-    'id': string;
-    'email': string;
+    id: string;
+    email: string;
 }

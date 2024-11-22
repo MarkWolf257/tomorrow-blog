@@ -1,0 +1,29 @@
+extends layouts/main
+
+block metadata
+    title Profile
+    link(rel='stylesheet' href='/css/modal.css')
+    link(rel='stylesheet' href='/css/form.css')
+    link(rel='stylesheet' href='/css/inputs.css')
+
+block content
+    main.modal
+        h1 Profile
+
+        form(hx-post='/profile/update' hx-swap='none' enctype='multipart/form-data')
+            div.top-label-container
+                label(for='avatar') Profile Picture
+                img#preview.avatar(src=avatar alt='Profile Picture' width='160px' height='160px')
+                input#avatar(name='avatar' type='file' accept='image/png')
+            div.top-label-container
+                label(for='name') Name
+                input#name(name='name' type='text' value=name required)
+            div.top-label-container
+                label(for='description') Description
+                textarea#description(name='description' required)=description
+            div.top-label-container
+                button Save Changes
+    script.
+      document.getElementById('avatar').addEventListener('change', (event) => {
+        document.getElementById('preview').src = URL.createObjectURL(event.target.files[0]);
+      });

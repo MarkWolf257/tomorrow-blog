@@ -3,6 +3,33 @@ extends layouts/main.pug
 block metadata
     title Tom's Blog
     link(rel='stylesheet' href='/css/inputs.css')
+    link(rel='stylesheet' href='/css/header.css')
+    link(rel='stylesheet' href='/css/card.css')
+    style.
+        main {
+            padding: 40px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+        }
+
+
 
 block content
-    button(hx-post='/logout') Logout
+    header
+        h1 Browse Articles
+        div
+            a(href='/profile') Profile
+            a(href='/editor') Post
+            button(hx-post='/logout') Logout
+    main
+        each obj in articles
+            a(href=obj.link)
+                article.card
+                    img(src=obj.thumbnail alt='Thumbnail' width='320px' height='180px')
+                    div
+                        h2=obj.title
+                        div.card-profile
+                            img.avatar(src=obj.avatar alt='Profile Picture' width='32px' height='32px')
+                            p=obj.author

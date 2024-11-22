@@ -1,0 +1,22 @@
+.card {
+    background-color: white;
+    width: min-content;
+    color: black;
+}
+
+.card h2 {
+    margin: 0;
+}
+
+.card>div {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.card-profile {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}

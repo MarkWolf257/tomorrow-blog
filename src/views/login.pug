@@ -11,7 +11,7 @@ block content
         h1 Log In
         p Welcome! Please log in to your account.
 
-        form(hx-boost='true' action='/login' method='post')
+        form(hx-boost='true' method='post')
             div.top-label-container
                 label(for='email') Email
                 input#email(name='email' type='email' placeholder='example@domain.com' required)

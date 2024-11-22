@@ -1,0 +1,15 @@
+extends layouts/main
+
+block metadata
+    title=title
+    link(rel='stylesheet' href='/css/article.css')
+
+
+block content
+    main
+        !=content
+        div#profile
+            img.avatar(src=avatar alt='Profile Picture' width='128px' height='128px')
+            div
+                h2=author
+                p=description

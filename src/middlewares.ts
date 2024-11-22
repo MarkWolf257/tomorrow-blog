@@ -11,12 +11,15 @@ const getToken = (req: Request) =>
 
 const verifyToken = async(token: string) : Promise<string | null> => {
     const { id } = <MyPayload>jwt.decode(token);
-    const query = 'SELECT jwt_secret FROM user_credentials WHERE user_id = $1';
-    const result = await pool.query(query, [id]);
-    const secret = result.rows[0].jwt_secret;
 
     try {
-        jwt.verify(token, secret);
+        const query = 'SELECT jwt_secret FROM user_credentials WHERE user_id = $1';
+        const result = await pool.query(query, [id]);
+
+        if (!result.rows[0])
+            throw new Error('No user found with id ' + id);
+
+        jwt.verify(token, result.rows[0].jwt_secret);
         return id;
     } catch (e) {
         console.log(e);

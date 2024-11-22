@@ -1,14 +1,14 @@
-document.body.addEventListener('htmx:responseError', function (event) {
+const createToast = (iconSrc, messageText) => {
   const toast = document.createElement('div');
 
   const icon = document.createElement('img');
-  icon.setAttribute('src', '/icons/circle-exclamation-solid.svg');
+  icon.setAttribute('src', iconSrc);
   icon.setAttribute('alt', 'Error Icon');
   icon.setAttribute('width', '32px');
   icon.setAttribute('height', '32px');
 
   const message = document.createElement('p');
-  message.textContent = event.detail.xhr.responseText;
+  message.textContent = messageText;
 
   const close = document.createElement('img');
   close.setAttribute('src', '/icons/xmark-solid.svg');
@@ -26,4 +26,8 @@ document.body.addEventListener('htmx:responseError', function (event) {
 
   document.getElementById('toast-container').appendChild(toast);
   setTimeout(() => { document.getElementById('toast-container').lastChild.remove(); }, 3000);
+}
+
+document.body.addEventListener('htmx:afterRequest', function (event) {
+  createToast('/icons/circle-exclamation-solid.svg', event.detail.xhr.responseText);
 });

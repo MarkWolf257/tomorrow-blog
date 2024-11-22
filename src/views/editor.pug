@@ -3,6 +3,7 @@ extends layouts/main
 block metadata
     title Edit Article
     link(rel='stylesheet' href='/modules/quill/quill.snow.css')
+    link(rel='stylesheet' href='/css/header.css')
     link(rel='stylesheet' href='/css/form.css')
     link(rel='stylesheet' href='/css/inputs.css')
     link(rel='stylesheet' href='/css/editor.css')
@@ -22,9 +23,9 @@ block content
                 div.top-label-container
                     label Thumbnail
                     img#preview(src='/images/placeholder.svg' alt='Preview Thumbnail' width='320px' height='180px')
-                    input#thumbnail(name='thumbnail' type='file' accept='image/jpeg,image/png')
+                    input#thumbnail(name='thumbnail' type='file' accept='image/png' required)
                 div.top-label-container
-                    button Save Changes
+                    button Post
 
 
 

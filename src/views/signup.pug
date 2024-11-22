@@ -11,7 +11,7 @@ block content
         h1 Sign Up
         p Welcome! Please create your new account.
 
-        form(hx-boost='true' action='/signup' method='post')
+        form(hx-boost='true' method='post')
             div.top-label-container
                 label(for='name') Name
                 input#name(name='name' type='text' placeholder='John Titor' required)
